@@ -8,6 +8,7 @@ export const TurnosForm = () => {
   const [fechaFiltro, setFechaFiltro] = useState<string>("");
   const [espFiltro, setEspFiltro] = useState<number | "">("");
   const [turnoSeleccionado, setTurnoSeleccionado] = useState<Turno | null>(null);
+  const [estadoFiltro, setEstadoFiltro] = useState<string>("");
 
   const cargarTurnos = () => {
     fetch("http://127.0.0.1:8000/api/turnos")
@@ -39,8 +40,12 @@ export const TurnosForm = () => {
     const coincideEsp = espFiltro
       ? t.medico.especialidad.id === espFiltro
       : true;
+    
+    const coincideEstado = estadoFiltro
+      ? t.estado.nombre === estadoFiltro
+      : true;
 
-    return coincideFecha && coincideEsp;
+    return coincideFecha && coincideEsp && coincideEstado;
   });
 
   // ----------------------------- 
@@ -90,6 +95,18 @@ export const TurnosForm = () => {
             ))}
           </select>
         </div>
+      </div>
+
+      <div>
+          <label>Filtrar por estado:</label><br />
+          <select
+            value={estadoFiltro}
+            onChange={(e) => setEstadoFiltro(e.target.value)}
+          >
+            <option value="">Todos</option>
+            <option value="Libre">Disponibles</option>
+            <option value="Ocupado">Ocupados</option>
+          </select>
       </div>
 
       {/* CALENDARIO */}

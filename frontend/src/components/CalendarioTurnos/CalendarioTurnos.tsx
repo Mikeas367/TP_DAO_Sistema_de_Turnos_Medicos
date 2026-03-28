@@ -23,7 +23,7 @@ export const CalendarTurnos: React.FC<Props> = ({ turnos, onSeleccionar, onLiber
             style={{ cursor: esOcupado ? "default" : "pointer" }}
           >
             <strong>
-              {fecha.toLocaleDateString()} - {fecha.getHours()}:00
+              {fecha.toLocaleDateString()} - {fecha.getHours()}:{fecha.getMinutes()}
             </strong>
 
             <p>

@@ -8,7 +8,8 @@ class SqlitePacienteRepository(IRepository):
         self.db = db
 
     def save(self, paciente: Paciente):
-        pass
+        query = "INSERT INTO pacientes (nombre, apellido, email) VALUES (?, ?, ?) "
+        self.db.execute(query, (paciente.nombre, paciente.apellido, paciente.email))
 
     def getAll(self):
         print("ENtRO AL GETALL")
@@ -45,7 +46,7 @@ class SqlitePacienteRepository(IRepository):
         
 
     def deleteById(self, id):
-        query = "DELETE FROM medicos WHERE id = ?"
+        query = "DELETE FROM pacientes WHERE id = ?"
         cursor = self.db.execute(query, (id,))
         return cursor.rowcount > 0
 

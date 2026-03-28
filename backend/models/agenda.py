@@ -26,7 +26,7 @@ class Agenda:
                 hora = datetime.combine(fecha_actual, regla.hora_inicio)
                 hora_fin = datetime.combine(fecha_actual, regla.hora_fin)
 
-                while hora < hora_fin:
+                while hora <= hora_fin:
                     turno = Turno(
                         id=None,
                         paciente=None,

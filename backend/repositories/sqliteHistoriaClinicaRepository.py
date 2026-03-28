@@ -23,9 +23,9 @@ class SqliteHistoriaClinicaRepository(IRepository):
                 -- Especialidad del médico
                 e.id, e.nombre, e.descripcion
 
-            FROM historia_clinica hc
-            JOIN pacientes p ON hc.id_paciente = p.id
-            JOIN medicos m ON hc.id_medico = m.id
+            FROM historiales hc
+            JOIN pacientes p ON hc.paciente_id = p.id
+            JOIN medicos m ON hc.medico_id = m.id
             JOIN especialidades e ON m.especialidad_id = e.id
         """
 

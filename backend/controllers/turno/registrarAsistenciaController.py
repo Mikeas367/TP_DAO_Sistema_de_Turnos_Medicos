@@ -14,7 +14,8 @@ class RegistraAsistenciaController:
 
     def obtener_fecha_hora_actual(self):
         fechaHoraActual = datetime.now()
-        self.fecha_hora_actual = fechaHoraActual
+        fecha_parseada = fechaHoraActual.strftime("%Y-%m-%d")
+        self.fecha_hora_actual = fecha_parseada
     
     def registrarAsistencia(self, turno: TurnoAsistencia):
         turno_a_marcar = self.buscar_turno(turno.turno_id)
@@ -22,7 +23,7 @@ class RegistraAsistenciaController:
         estado_asistido = self.buscar_estado_asistido()
         self.obtener_fecha_hora_actual()
 
-        medico = turno_a_marcar.medico
+        medico = turno_a_marcar.medico  
         paciente = turno_a_marcar.paciente
     
 

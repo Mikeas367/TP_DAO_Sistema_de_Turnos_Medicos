@@ -6,7 +6,8 @@ class PacienteController:
         self.repository = repository
 
     def crear_paciente(self, nombre: str, apellido: str, email: str):
-        paciente = Paciente(nombre, apellido, email)
+        paciente = Paciente(None, nombre, apellido, email)
+        print("Se crea El pacienteee", paciente)
         self.repository.save(paciente)
         return paciente
 
@@ -23,8 +24,7 @@ class PacienteController:
     
     def eliminar_paciente_por_id(self, id: int) -> bool:
         try:
-            eliminado = self.repository.deleteById(id)
-            return eliminado
+            self.repository.deleteById(id)
         except Exception:
             return False
         

@@ -7,16 +7,21 @@ class Database:
         self.create_table()
 
     def create_table(self):
-        # Tabla de Especialidades
+
+        # ==========================
+        #   TABLA ESPECIALIDADES
+        # ==========================
         self.cursor.execute('''
-                CREATE TABLE IF NOT EXISTS especialidades (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    nombre TEXT NOT NULL, 
-                    descripcion TEXT NOT NULL   
-                )
-            ''')
-        
-        # Tabla de Medicos
+            CREATE TABLE IF NOT EXISTS especialidades (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                nombre TEXT NOT NULL, 
+                descripcion TEXT NOT NULL   
+            )
+        ''')
+
+        # ==========================
+        #   TABLA MEDICOS
+        # ==========================
         self.cursor.execute('''
             CREATE TABLE IF NOT EXISTS medicos (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -27,8 +32,10 @@ class Database:
                 FOREIGN KEY (especialidad_id) REFERENCES especialidades(id)
             )
         ''')
-        
-        # Tabla de Pacientes
+
+        # ==========================
+        #   TABLA PACIENTES
+        # ==========================
         self.cursor.execute('''
             CREATE TABLE IF NOT EXISTS pacientes (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -38,7 +45,9 @@ class Database:
             )
         ''')
 
-        # Tabla de Estados
+        # ==========================
+        #   TABLA ESTADOS
+        # ==========================
         self.cursor.execute('''
             CREATE TABLE IF NOT EXISTS estados (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -47,7 +56,9 @@ class Database:
             )
         ''')
 
-        # Tabla de Turnos
+        # ==========================
+        #   TABLA TURNOS
+        # ==========================
         self.cursor.execute('''
             CREATE TABLE IF NOT EXISTS turnos (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -61,43 +72,64 @@ class Database:
             )
         ''')
 
-        # Tabla Historial clinico
+        # ==========================
+        #   TABLA RECETAS
+        # ==========================
         self.cursor.execute('''
-                CREATE TABLE IF NOT EXISTS historiales (
-                            id INTEGER PRIMARY KEY AUTOINCREMENT,
-                            medico_id INTEGER NOT NULL,
-                            fecha TEXT NOT NULL,
-                            paciente_id INTEGER NOT NULL,
-                            diagnostico TEXT NOT NULL,
-                            tratamiento TEXT NOT NULL,
-                            FOREIGN KEY (paciente_id) REFERENCES pacientes(id),
-                            FOREIGN KEY (medico_id) REFERENCES medicos(id)
-                            )
-            ''')
-        
-        # Tabla Agenda
-        self.cursor.execute('''
-                CREATE TABLE IF NOT EXISTS agendas_medico (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    medico_id INTEGER NOT NULL,
-                    FOREIGN KEY (medico_id) REFERENCES medicos(id)
-                    )   
-            ''')
-        
-        # Tabla Dia Laboral 
-        self.cursor.execute('''
-                CREATE TABLE IF NOT EXISTS agenda_dias_trabajo (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    agenda_id INTEGER NOT NULL,
-                    dia_semana INTEGER NOT NULL,       -- 0 a 6
-                    hora_inicio TEXT NOT NULL,         -- "08:00"
-                    hora_fin TEXT NOT NULL,            -- "12:00"
-                    duracion_turno_min INTEGER NOT NULL,
+            CREATE TABLE IF NOT EXISTS recetas (
+                receta_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                paciente_id INTEGER NOT NULL,
+                medico_id INTEGER NOT NULL,
+                fecha_emision TEXT NOT NULL,
+                detalle_medicamento TEXT NOT NULL,
+                tratamiento TEXT NOT NULL,
+                FOREIGN KEY (paciente_id) REFERENCES pacientes(id),
+                FOREIGN KEY (medico_id) REFERENCES medicos(id)
+            )
+        ''')
 
-                    FOREIGN KEY (agenda_id) REFERENCES agendas_medico(id)
-                    )
-            ''')
-        
+        # ==========================
+        #   TABLA HISTORIALES
+        # ==========================
+        self.cursor.execute('''
+            CREATE TABLE IF NOT EXISTS historiales (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                medico_id INTEGER NOT NULL,
+                fecha TEXT NOT NULL,
+                paciente_id INTEGER NOT NULL,
+                diagnostico TEXT NOT NULL,
+                tratamiento TEXT NOT NULL,
+                FOREIGN KEY (paciente_id) REFERENCES pacientes(id),
+                FOREIGN KEY (medico_id) REFERENCES medicos(id)
+            )
+        ''')
+
+        # ==========================
+        #   TABLA AGENDAS MEDICO
+        # ==========================
+        self.cursor.execute('''
+            CREATE TABLE IF NOT EXISTS agendas_medico (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                medico_id INTEGER NOT NULL,
+                FOREIGN KEY (medico_id) REFERENCES medicos(id)
+            )
+        ''')
+
+        # ==========================
+        #   TABLA DIAS LABORABLES
+        # ==========================
+        self.cursor.execute('''
+            CREATE TABLE IF NOT EXISTS agenda_dias_trabajo (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                agenda_id INTEGER NOT NULL,
+                dia_semana INTEGER NOT NULL,       
+                hora_inicio TEXT NOT NULL,         
+                hora_fin TEXT NOT NULL,            
+                duracion_turno_min INTEGER NOT NULL,
+                FOREIGN KEY (agenda_id) REFERENCES agendas_medico(id)
+            )
+        ''')
+
         self.conn.commit()
 
     def execute(self, query, params=()):

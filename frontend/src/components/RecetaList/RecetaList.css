@@ -1,0 +1,10 @@
+.btn-calido-naranja {
+    background-color: #ff9f43;
+    color: white;
+    font-weight: bold;
+}
+
+.btn-calido-naranja:hover {
+    background-color: #ff7f22;
+    color: white;
+}

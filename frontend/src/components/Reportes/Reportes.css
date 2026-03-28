@@ -1,0 +1,32 @@
+/* Botón naranja cálido */
+.btn-calido-naranja {
+  background-color: #ff8c42;
+  color: white;
+  border: none;
+}
+.btn-calido-naranja:hover {
+  background-color: #e6762e;
+  color: white;
+}
+
+/* Botón coral cálido */
+.btn-calido-coral {
+  background-color: #ff6f61;
+  color: white;
+  border: none;
+}
+.btn-calido-coral:hover {
+  background-color: #e45b4f;
+  color: white;
+}
+
+/* Botón amarillo cálido */
+.btn-calido-amarillo {
+  background-color: #f4c542;
+  color: #5a4500;
+  border: none;
+}
+.btn-calido-amarillo:hover {
+  background-color: #d9ae35;
+  color: #3c2f00;
+}

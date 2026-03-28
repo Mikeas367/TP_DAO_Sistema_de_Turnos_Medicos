@@ -13,7 +13,7 @@ export const FormOcuparTurno: React.FC<Props> = ({ turno, onClose, onConfirm }) 
   const [pacientes, setPacientes] = useState<Paciente[]>([]);
   const [pacienteId, setPacienteId] = useState<number | "">("");
 
-  // ⭐ GARANTIZA QUE NO CRASHÉE EL RENDER
+  
   if (!turno) return null;
 
   useEffect(() => {

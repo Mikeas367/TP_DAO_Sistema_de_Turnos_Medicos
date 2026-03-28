@@ -23,7 +23,7 @@ class GeneradorTurnosController:
     def generar_turnos_de_agenda(self, id:int):
         agenda = self.buscar_agenda_por_id(id)
         estado_libre = self.buscar_estado_libre()
-
+        turnos = self.turnos_repo.getAll()
         fecha_desde = date.today()
         fecha_hasta = fecha_desde + timedelta(days=10)
         

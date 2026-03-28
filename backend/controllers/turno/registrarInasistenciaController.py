@@ -14,7 +14,9 @@ class RegistraInAsistenciaController:
         turno_a_marcar = self.buscar_turno(turno.turno_id)
         estado_no_asistido = self.buscar_estado_no_asistido()
         fecha_turno_str = turno_a_marcar.fecha
-        fecha_turno = datetime.strptime(fecha_turno_str, "%Y-%m-%d %H:%M")
+
+        print("FECHA RECIBIDA:", fecha_turno_str)
+        fecha_turno = datetime.strptime(fecha_turno_str, "%Y-%m-%d %H:%M:%S")
         fechaHoraActual = datetime.now()
 
         if fecha_turno > fechaHoraActual:

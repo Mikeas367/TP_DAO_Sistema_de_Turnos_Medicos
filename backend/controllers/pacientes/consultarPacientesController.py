@@ -7,7 +7,6 @@ class ConsultarPacientesController:
         self.paciente_repo = paciente_repo
 
     def obtener_pacientes(self):
-        print("HOLAAA")
         try:
             pacientes = self.paciente_repo.getAll()
             return pacientes
